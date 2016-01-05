@@ -1,1 +1,15 @@
 <h1><%= @goal.title %></h1>
+
+<% if current_user.id == @goal.user_id %>
+
+  <form action="<%= edit_goal_url(@goal) %>" method="get">
+    <input type="submit" value="Edit Goal">
+  </form>
+
+  <form action="<%= goal_url(@goal) %>" method="post">
+    <%= auth_token_input %>
+    <input type="hidden" name="_method" value="delete">
+
+    <input type="submit" value="Delete Goal">
+  </form>
+<% end %>

@@ -63,15 +63,25 @@ feature "goals" do
       expect(page).to have_content(goal.title)
     end
 
-    # scenario "goal page has edit and delete button" do
-    #
-    # end
+    scenario "goal page has edit and delete button" do
+      user = sign_in_as_robert
+      goal = Goal.create!(title: Faker::Hipster.sentence, user_id: user.id)
+      visit goal_url(goal)
+      expect(page).to have_button("Edit Goal")
+      expect(page).to have_button("Delete Goal")
+    end
 
   end
 
   feature "user can update goals" do
 
-    # scenario "has a page for editing goals"
+    scenario "has a page for editing goals" do
+      user = sign_in_as_robert
+      goal = Goal.create!(title: Faker::Hipster.sentence, user_id: user.id)
+      visit goal_url(goal)
+      click_button("Edit Goal")
+      expect(page).to have_content("Edit Goal")
+    end
 
   end
 
