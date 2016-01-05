@@ -1,7 +1,7 @@
 <h1>Edit Goal</h1>
 
 <form action="<%= goal_url(@goal) %>" method="post">
-  <input type="hidden" name="_hidden" value="patch">
+  <input type="hidden" name="_method" value="patch">
   <%= auth_token_input %>
 
   <label for="title">Title</label>

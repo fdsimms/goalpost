@@ -25,7 +25,14 @@ class GoalsController < ApplicationController
   end
 
   def update
+    @goal = Goal.find(params[:id])
 
+    if @goal.update(goal_params)
+      redirect_to goal_url(@goal)
+    else
+      flash.now[:errors] = @goal.errors.full_messages
+      render :edit
+    end
   end
 
   def index

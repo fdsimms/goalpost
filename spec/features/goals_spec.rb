@@ -83,6 +83,17 @@ feature "goals" do
       expect(page).to have_content("Edit Goal")
     end
 
+    scenario "changes are reflected in goal show page" do
+      user = sign_in_as_robert
+      goal = Goal.create!(title: Faker::Hipster.sentence, user_id: user.id)
+      visit edit_goal_url(goal)
+      
+      new_title = Faker::Hacker.say_something_smart
+      fill_in("Title", with: new_title)
+      click_button("Submit")
+      expect(page).to have_content(new_title)
+    end
+
   end
 
 
