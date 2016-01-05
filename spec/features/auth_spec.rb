@@ -10,7 +10,16 @@ feature "the signup process" do
 
   feature "signing up a user" do
 
-    scenario "shows username on the homepage after signup"
+    scenario "shows username on the homepage after signup" do
+      visit new_user_url
+      user = User.new(username: "Robert", password: "password")
+
+      fill_in("Username", with: user.username)
+      fill_in("Password", with: user.password)
+      save_and_open_page
+      click_button("Submit")
+      expect(page).to have_content(user.username)
+    end
 
   end
 
