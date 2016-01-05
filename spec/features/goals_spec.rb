@@ -32,7 +32,18 @@ feature "goals" do
       expect(page).to have_content(title)
     end
 
+    scenario "index page shows all user's goals" do
+      user = sign_in_as_robert
+      5.times do
+        Goal.create!(title: Faker::Hipster.sentence, user_id: user.id)
+      end
 
+      visit user_goals_url(user)
+      user.goals.each do |goal|
+        expect(page).to have_content(goal.title)
+      end
+      save_and_open_page
+    end
 
   end
 
