@@ -45,6 +45,10 @@ feature "logging out" do
     expect(page).to have_content("Logged in as")
   end
 
-  scenario "doesn't show username on the homepage after logout"
+  scenario "doesn't show username on the homepage after logout" do
+    user = sign_in_as_robert
+    click_button("Sign out")
+    expect(page).to have_no_content(user.username)
+  end
 
 end

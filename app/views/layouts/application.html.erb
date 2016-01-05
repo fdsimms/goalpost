@@ -10,6 +10,12 @@
 
 <% if signed_in? %>
   <h5>Logged in as <%= current_user.username %></h5>
+  <form action="<%= session_url %>" method="post">
+    <%= auth_token_input %>
+    <input type="hidden" name="_method" value="delete">
+
+    <input type="submit" value="Sign out">
+  </form>
 <% end %>
 
 <% unless flash.now[:errors].nil? %>
