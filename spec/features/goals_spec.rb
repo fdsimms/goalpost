@@ -42,18 +42,27 @@ feature "goals" do
       user.goals.each do |goal|
         expect(page).to have_content(goal.title)
       end
-      save_and_open_page
+    end
+
+  end
+
+  feature "user can view goals" do
+
+    scenario "each goal has a show page" do
+      user = sign_in_as_robert
+      goal = Goal.create!(title: Faker::Hipster.sentence, user_id: user.id)
+      visit goal_url(goal)
+      expect(page).to have_content(goal.title)
     end
 
   end
 
   feature "user can update goals" do
 
-  end
-
-  feature "user can view goals" do
+    # scenario "has a page for editing goals"
 
   end
+
 
   feature "user can delete goals" do
 
