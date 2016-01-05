@@ -40,7 +40,7 @@ feature "goals" do
 
       visit user_goals_url(user)
       user.goals.each do |goal|
-        expect(page).to have_content(goal.title)
+        expect(page).to have_link(goal.title)
       end
     end
 

@@ -2,6 +2,6 @@
 
 <ul>
   <% @goals.each do |goal| %>
-    <li><%= goal.title %></li>
+    <li><a href="<%= goal_url(goal) %>"><%= goal.title %></a></li>
   <% end %>
 </ul>
