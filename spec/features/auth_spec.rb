@@ -36,7 +36,14 @@ end
 
 feature "logging out" do
 
-  scenario "begins with logged out state"
+  scenario "begins with logged out state" do
+    visit new_user_url
+    expect(page).to have_no_content("Logged in as")
+
+    user = sign_in_as_robert
+    visit new_user_url
+    expect(page).to have_content("Logged in as")
+  end
 
   scenario "doesn't show username on the homepage after logout"
 
