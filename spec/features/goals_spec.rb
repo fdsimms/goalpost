@@ -21,6 +21,17 @@ feature "goals" do
       expect(page).to have_content("Public")
     end
 
+    scenario "after creating goal, user is shown list of user's goals" do
+      user = sign_in_as_robert
+      visit new_user_goal_url(user)
+
+      title = Faker::Hipster.sentence
+      fill_in("Title", with: title)
+      click_button("Submit")
+      expect(page).to have_content("#{user.username}'s Goals")
+      expect(page).to have_content(title)
+    end
+
 
 
   end

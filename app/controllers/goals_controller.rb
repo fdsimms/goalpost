@@ -6,7 +6,15 @@ class GoalsController < ApplicationController
   end
 
   def create
-    
+    @goal = Goal.new(goal_params)
+    @goal.user_id = current_user.id
+
+    if @goal.save
+      redirect_to user_goals_url(current_user)
+    else
+      flash.now[:errors] = @goal.errors.full_messages
+      render :new
+    end
   end
 
   def edit
@@ -18,7 +26,9 @@ class GoalsController < ApplicationController
   end
 
   def index
-
+    @user = User.find(params[:user_id])
+    @goals = @user.goals
+    render :index
   end
 
   def show
@@ -27,5 +37,11 @@ class GoalsController < ApplicationController
 
   def destroy
 
+  end
+
+  private
+
+  def goal_params
+    params.require(:goal).permit(:title, :privacy_setting)
   end
 end
