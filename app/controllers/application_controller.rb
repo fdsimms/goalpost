@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
   private
 
   def ensure_signed_in
+    flash[:errors] = ["Must be logged in."]
     redirect_to new_session_url unless signed_in?
   end
 

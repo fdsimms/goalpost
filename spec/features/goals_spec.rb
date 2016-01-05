@@ -12,6 +12,14 @@ feature "goals" do
       expect(page).to have_content("Create New Goal")
     end
 
+    scenario "user must be logged in to create goal" do
+      user = sign_in_as_robert
+      user.reset_session_token!
+      visit new_user_goal_url(user)
+
+      expect(page).to have_content("Must be logged in.")
+    end
+
     scenario "goal takes a title and privacy setting" do
       user = sign_in_as_robert
       visit new_user_goal_url(user)
@@ -54,6 +62,10 @@ feature "goals" do
       visit goal_url(goal)
       expect(page).to have_content(goal.title)
     end
+
+    # scenario "goal page has edit and delete button" do
+    #
+    # end
 
   end
 

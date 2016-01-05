@@ -1,5 +1,7 @@
 class GoalsController < ApplicationController
 
+  before_action :ensure_signed_in, only: [:new]
+
   def new
     @goal = Goal.new
     render :new
