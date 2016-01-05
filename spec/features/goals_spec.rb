@@ -87,7 +87,7 @@ feature "goals" do
       user = sign_in_as_robert
       goal = Goal.create!(title: Faker::Hipster.sentence, user_id: user.id)
       visit edit_goal_url(goal)
-      
+
       new_title = Faker::Hacker.say_something_smart
       fill_in("Title", with: new_title)
       click_button("Submit")
@@ -98,6 +98,15 @@ feature "goals" do
 
 
   feature "user can delete goals" do
+
+    scenario "deletes goal" do
+      user = sign_in_as_robert
+      goal = Goal.create!(title: Faker::Hipster.sentence, user_id: user.id)
+      visit goal_url(goal)
+      click_button("Delete Goal")
+
+      expect(page).to have_no_content(goal.title)
+    end
 
   end
 end
