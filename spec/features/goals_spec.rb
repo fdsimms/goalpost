@@ -71,6 +71,16 @@ feature "goals" do
       expect(page).to have_button("Delete Goal")
     end
 
+    scenario "user can track completed goals" do
+      user = sign_in_as_robert
+      Goal.create!(title: Faker::Hipster.sentence, user_id: user.id, completed: false)
+      Goal.create!(title: Faker::Hacker.say_something_smart, user_id: user.id, completed: true)
+      visit user_goals_url(user)
+      expect(page).to have_content("Completed: true")
+      expect(page).to have_content("Completed: false")
+      save_and_open_page
+    end
+
   end
 
   feature "user can update goals" do
@@ -109,4 +119,5 @@ feature "goals" do
     end
 
   end
+
 end

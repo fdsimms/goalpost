@@ -2,6 +2,6 @@
 
 <ul>
   <% @goals.each do |goal| %>
-    <li><a href="<%= goal_url(goal) %>"><%= goal.title %></a></li>
+    <li><a href="<%= goal_url(goal) %>"><%= goal.title %></a> Completed: <%= goal.completed? %></li>
   <% end %>
 </ul>
